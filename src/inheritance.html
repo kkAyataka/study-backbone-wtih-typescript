@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="./scripts/libs/require.js"></script>
+    <script>
+      requirejs(['scripts/app/main/requirejs-config'], () => {
+        requirejs(['app/inheritance/main-view/main-view']);
+      });
+    </script>
+  </head>
+  <body>
+    <div id="content"></div>
+  </body>
+</html>

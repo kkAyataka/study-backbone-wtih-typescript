@@ -1,0 +1,15 @@
+<style>
+  .sub-view .frame {
+    border: solid 1px rgb(43, 99, 204);
+  }
+</style>
+
+<div class="frame">
+  <p>Sub View</p>
+  <div>
+    <input type="number" id="sub-value" value="<%- value %>">
+  </div>
+  <div>
+    <button type="button" id="sub-button">Set</button>
+  </div>
+</div>
