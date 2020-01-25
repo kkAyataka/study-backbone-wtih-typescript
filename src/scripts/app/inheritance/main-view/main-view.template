@@ -1,4 +1,13 @@
 <h1>Hello</h1>
 <button id="button" <%- enable ? '' : 'disabled' %>>ボタン</button>
 <input type="text" id="text" value="<%- text %>">
+<div>
+  <ul>
+    <%const v=0;%>
+    <% if (enable) { %>
+    <li>1</li>
+    <% } %>
+    <li>2</li>
+  </ul>
+</div>
 <div id="sub-view" class='sub-view'></div>

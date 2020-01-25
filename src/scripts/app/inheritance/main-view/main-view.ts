@@ -4,7 +4,7 @@ import {SubView, SubViewVModel} from './sub-view';
 import templateText from 'text!app/inheritance/main-view/main-view.template'
 
 class VModel {
-  text: string = '';
+  text: string = 'test';
   num: number = 0;
   enable: boolean = false;
   subView = {
@@ -36,7 +36,7 @@ new (class MainView extends BBView<VModel> {
         this.vmodel.value({
           text: eve.target.value,
           enable: eve.target.value.length > 0,
-        });
+        }, {silent:false});
       },
 
       'change:value #sub-view': (eve: any, extra: SubViewVModel) => {
