@@ -1,4 +1,4 @@
-import BBView from '../base/bbview';
+import {BBView} from '../base/bbview';
 import BBVModel from '../base/bbvmodel';
 import {SubView, SubViewVModel} from './sub-view';
 import templateText from 'text!app/inheritance/main-view/main-view.template'
