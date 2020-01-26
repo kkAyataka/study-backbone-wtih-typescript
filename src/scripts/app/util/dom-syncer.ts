@@ -1,4 +1,4 @@
-import {BaseView} from '../inheritance/base/bbview';
+import {BBBaseView} from '../inheritance/base/bbview';
 
 /**
  * Attribute name of the rid
@@ -29,12 +29,12 @@ export namespace DOMSyncer {
    * @param subViews
    * @param newEl
    */
-  export function sync(nowEl: Element, subViews: BaseView[], newEl: Element): void {
+  export function sync(nowEl: Element, subViews: BBBaseView[], newEl: Element): void {
     syncElements(nowEl, subViews, newEl);
   }
 
   /** Implementation of the sync function @private */
-  function syncElements(nowEl: Element, subViews: BaseView[], newEl: Element): boolean {
+  function syncElements(nowEl: Element, subViews: BBBaseView[], newEl: Element): boolean {
     if (newEl.childElementCount === 0 && nowEl.childElementCount === 0) {
       syncAttributes(nowEl, newEl);
       return nowEl.outerHTML === newEl.outerHTML;
@@ -110,9 +110,9 @@ export namespace DOMSyncer {
   }
 
   /** Checks whether the element is a sub view or not @private */
-  function isSubView(subViews: BaseView[], el: Element): boolean {
+  function isSubView(subViews: BBBaseView[], el: Element): boolean {
     for (let view of subViews) {
-      if (view.rootElement() === el) {
+      if (view.rootElement === el) {
         return true;
       }
     }

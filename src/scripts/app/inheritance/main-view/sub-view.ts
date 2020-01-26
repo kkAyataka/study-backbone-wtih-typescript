@@ -2,16 +2,15 @@ import {BBView} from '../base/bbview';
 import BBVModel from '../base/bbvmodel';
 import templateText from 'text!app/inheritance/main-view/sub-view.template';
 
-export class SubViewVModel {
+namespace SubView {
+
+export class VModel {
   value: number = 0;
 }
 
-export class SubView extends BBView<SubViewVModel> {
-  static VModel = SubViewVModel;
-  static num: number = 0;
-
+export class View extends BBView<VModel> {
   constructor(el: string, valueName?:string) {
-    super({el, templateText, valueName, vmodel: new BBVModel(new SubViewVModel())});
+    super({el, templateText, valueName, vmodel: new BBVModel(new VModel())});
   }
 
   events() {
@@ -24,6 +23,8 @@ export class SubView extends BBView<SubViewVModel> {
       },
     }
   }
+}
+
 }
 
 export default SubView;

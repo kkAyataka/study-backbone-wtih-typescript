@@ -7,8 +7,8 @@ declare module "backbone-inheritance" {
     constructor(opts: {el: string, valueName?: string});
     protected initialize(): void;
     protected setElement(el: string): View;
-    protected el: any;
-    protected $el: any;
+    protected readonly el: any;
+    protected readonly $el: any;
     protected events(): {[k: string]: Function | string};
   }
 
@@ -16,12 +16,11 @@ declare module "backbone-inheritance" {
    * Backbone.Model
    */
   export class Model<T extends object> extends Events {
-    constructor(attrs?: T);
+    constructor(attrs: T);
     protected set(attrs: Partial<T>, opts?: {silent: boolean}): void;
     protected get(attr: string): any;
-    protected attributes: object;
-    //changed: T;
-    changed: {[k: string]: object};
+    protected readonly attributes: T;
+    readonly changed: {[k: string]: object};
   }
 
   /**
