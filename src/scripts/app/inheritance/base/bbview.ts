@@ -98,7 +98,6 @@ export class BBView<T extends object> extends BBBaseView {
    * But dom object keeping is very useful.
    */
   render(value?: object): this {
-    console.log(this.valueName, value);
     this.ensureElement_();
 
     this.vmodel.value(value, {silent: true});
@@ -113,7 +112,6 @@ export class BBView<T extends object> extends BBBaseView {
     }
 
     for (let view of this.views_) {
-      console.log('subRender:', this.vmodel.changed[view.valueName]);
       view.render(this.vmodel.changed[view.valueName]);
     }
 

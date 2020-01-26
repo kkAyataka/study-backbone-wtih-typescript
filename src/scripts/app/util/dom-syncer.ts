@@ -34,12 +34,19 @@ export namespace DOMSyncer {
   }
 
   /** Implementation of the sync function @private */
-  function syncElements(nowEl: Element, subViews: BBBaseView[], newEl: Element): boolean {
-    if (newEl.childElementCount === 0 && nowEl.childElementCount === 0) {
-      syncAttributes(nowEl, newEl);
-      return nowEl.outerHTML === newEl.outerHTML;
-    } else if (newEl.childElementCount === 0) {
-      return false;
+  function syncElements(nowEl: Element, subViews: BBBaseView[], newEl: Element): void {
+    syncAttributes(nowEl, newEl);
+
+    if (nowEl.childElementCount === 0) {
+      if (newEl.childElementCount > 0) {
+        for (let c of newEl.children) {
+          nowEl.appendChild(c);
+        }
+      }
+
+      if (nowEl.outerHTML !== newEl.outerHTML) {
+        nowEl.outerHTML = newEl.outerHTML;
+      }
     } else {
       let isSame = true;
 
@@ -52,22 +59,22 @@ export namespace DOMSyncer {
           const nowC = child?.el;
           const nowI = child?.index;
 
-          if (nowC && nowI === i) {
-            const r = syncElements(nowC, subViews, newC);
-            if (!r && !isSubView(subViews, nowC)) {
-              nowC.outerHTML = newC.outerHTML;
+          if (nowC) {
+            if (!isSubView(subViews, nowC)) {
+              syncElements(nowC, subViews, newC);
             }
-            isSame =  r && isSame;
-          } else if (nowC) {
-            // nowEl.children[i] is none in now
-            nowEl.children[i].remove();
           } else {
             nowEl.insertBefore(newC, nowEl.children[i]);
           }
+
+          if (nowC && nowI !== i) {
+            // nowEl.children[i] is none in now
+            nowEl.children[i].remove();
+          }
+        } else {
+          nowEl.insertBefore(newC, nowEl.children[i]);
         }
       }
-
-      return isSame;
     }
   }
 
@@ -78,7 +85,10 @@ export namespace DOMSyncer {
       const item = newEl.attributes.getNamedItem(attr.name);
       if (item) {
         nowEl.setAttribute(attr.name, item.value);
-      } else {
+      } else if (
+        attr.name !== 'id' &&
+        attr.name !== ATTR_NAME_RID) {
+
         nowEl.removeAttribute(attr.name);
       }
     }
