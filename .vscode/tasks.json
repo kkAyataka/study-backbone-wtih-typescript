@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "gulp",
+      "task": "default",
+      "problemMatcher": []
+    },
+    {
+      "type": "gulp",
+      "task": "watch",
+      "problemMatcher": []
+    },
+    {
+      "label": "tsc:watch",
+      "type": "shell",
+      "windows": {
+        "command": "tsc -w"
+      },
+    },
+    {
+      "label": "live-server",
+      "type": "shell",
+      "windows": {
+        "command": "live-server out"
+      },
+    }
+  ]
+}
