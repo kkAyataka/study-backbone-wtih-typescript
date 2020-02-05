@@ -4,7 +4,7 @@ declare module "backbone-inheritance" {
    * Backbone.View
    */
   export class View extends Events {
-    constructor(opts: {el: string, valueName?: string});
+    constructor(opts: {el: string});
     protected initialize(): void;
     protected setElement(el: string): View;
     protected readonly el: any;

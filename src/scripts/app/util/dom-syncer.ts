@@ -4,7 +4,7 @@ import {BBBaseView} from '../inheritance/base/bbview';
  * Attribute name of the rid
  * @private
  */
-const ATTR_NAME_RID = 'domsync-rid';
+const ATTR_NAME_RID = 'data-domsyncerid';
 
 /**
  * Managed embedded rid
@@ -15,7 +15,7 @@ let g_rid: number = 0;
 export namespace DOMSyncer {
   /**
    * Embed rendering id (rid) to the HTML elements.
-   * e.g. <div></div> -> <div domsync-rid="0">
+   * e.g. <div></div> -> <div data-domsyncerid="0">
    * @param templateText
    */
   export function embedRID(templateText: string): string {
