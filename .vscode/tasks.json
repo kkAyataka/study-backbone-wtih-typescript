@@ -14,16 +14,12 @@
     {
       "label": "tsc:watch",
       "type": "shell",
-      "windows": {
-        "command": "tsc -w"
-      },
+      "command": "tsc -w"
     },
     {
       "label": "live-server",
       "type": "shell",
-      "windows": {
-        "command": "live-server out"
-      },
+      "command": "live-server out",
     }
   ]
 }
