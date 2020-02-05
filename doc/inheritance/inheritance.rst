@@ -156,7 +156,7 @@ TypeScriptのクラス構造は次に示す通り。
    BBView -r-> BBVModel: #vmodel
    BBView --> BBBaseView: -views[]
 
-   BBVModel --> ConcreateVModel
+   BBVModel *--> ConcreateVModel
    BBView <|-- ConcreateView
 
    ConcreateView --> DBModel
