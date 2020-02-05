@@ -103,12 +103,13 @@ export class BBView<T extends object> extends BBBaseView {
     this.vmodel.value(value, {silent: true});
 
     const $nowEl = this.$el;
-    const $newEl = $('<div></div>').html(this.template_(this.vmodel.value()));
+    const newEl = document.createElement('div');
+    newEl.innerHTML = this.template_(this.vmodel.value());
 
     if ($nowEl[0].childElementCount === 0) {
-      $nowEl.html($newEl.html());
+      $nowEl.html(newEl.innerHTML);
     } else {
-      DOMSyncer.sync($nowEl[0], this.views_, $newEl[0]);
+      DOMSyncer.sync($nowEl[0], this.views_, newEl);
     }
 
     for (let view of this.views_) {
