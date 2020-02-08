@@ -1,0 +1,5 @@
+# Sphinx
+Sphinx
+Pillow
+sphinxcontrib-plantuml
+sphinx-material
