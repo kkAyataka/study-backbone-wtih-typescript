@@ -12,6 +12,7 @@
 #
 import os
 import sys
+import sphinx_material
 
 sys.path.insert(0, os.path.abspath('.'))
 
@@ -34,6 +35,7 @@ version = '0.1.0'
 # ones.
 extensions = [
     'sphinxcontrib.plantuml',
+    'sphinx_material',
 ]
 
 plantuml = f'java -jar {homedir}/.local/bin/plantuml.jar'
@@ -61,7 +63,24 @@ numfig = True
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'press'
+html_theme = 'sphinx_material'
+html_theme_path = sphinx_material.html_theme_path()
+html_context = sphinx_material.get_html_context()
+html_theme_options = {
+    'nav_title': 'Backbone with TypeScript',
+    # Set the color and the accent color
+    'color_primary': 'orange',
+    'color_accent': 'deep-orange',
+    # Visible levels of the global TOC; -1 means unlimited
+    'globaltoc_depth': 3,
+    # If False, expand all TOC entries
+    'globaltoc_collapse': False,
+    # If True, show hidden TOC entries
+    'globaltoc_includehidden': False,
+}
+html_sidebars = {
+    "**": ["logo-text.html", "globaltoc.html", "localtoc.html", "searchbox.html"]
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
