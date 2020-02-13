@@ -24,7 +24,7 @@ export abstract class BBBaseView extends Backbone.View {
   }
 
   /** Render */
-  abstract render(value?: any): BBBaseView;
+  abstract render(value?: object): BBBaseView;
 
   /** Rendered root element */
   get rootElement(): Element | null {
@@ -109,7 +109,7 @@ export class BBView<T extends object> extends BBBaseView {
     if ($nowEl[0].childElementCount === 0) {
       $nowEl.html(newEl.innerHTML);
     } else {
-      DOMSyncer.sync($nowEl[0], this.views_, newEl);
+      DOMSyncer.sync($nowEl[0], this.getSubViewElements_(), newEl);
     }
 
     for (let view of this.views_) {
@@ -135,6 +135,20 @@ export class BBView<T extends object> extends BBBaseView {
    */
   private ensureElement_(): void {
     this.setElement(this.el_);
+  }
+
+  /**
+   * Gather sub view's Element objects.
+   */
+  private getSubViewElements_(): Element[] {
+    const els: Element[] = [];
+    for (let view of this.views_) {
+      if (view.rootElement) {
+        els.push(view.rootElement);
+      }
+    }
+
+    return els;
   }
 
   /** Element selector */

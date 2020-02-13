@@ -1,5 +1,3 @@
-import {BBBaseView} from '../inheritance/base/bbview';
-
 /**
  * Attribute name of the rid
  * @private
@@ -26,15 +24,15 @@ export namespace DOMSyncer {
   /**
    *
    * @param nowEl
-   * @param subViews
+   * @param subViewEls
    * @param newEl
    */
-  export function sync(nowEl: Element, subViews: BBBaseView[], newEl: Element): void {
-    syncElements(nowEl, subViews, newEl);
+  export function sync(nowEl: Element, subViewEls: Element[], newEl: Element): void {
+    syncElements(nowEl, subViewEls, newEl);
   }
 
   /** Implementation of the sync function @private */
-  function syncElements(nowEl: Element, subViews: BBBaseView[], newEl: Element): void {
+  function syncElements(nowEl: Element, subViewEls: Element[], newEl: Element): void {
     syncAttributes(nowEl, newEl);
 
     if (nowEl.childElementCount === 0) {
@@ -60,8 +58,8 @@ export namespace DOMSyncer {
           const nowI = child?.index;
 
           if (nowC) {
-            if (!isSubView(subViews, nowC)) {
-              syncElements(nowC, subViews, newC);
+            if (!subViewEls.includes(newC)) {
+              syncElements(nowC, subViewEls, newC);
             }
           } else {
             nowEl.insertBefore(newC, nowEl.children[i]);
@@ -117,17 +115,6 @@ export namespace DOMSyncer {
     }
 
     return null;
-  }
-
-  /** Checks whether the element is a sub view or not @private */
-  function isSubView(subViews: BBBaseView[], el: Element): boolean {
-    for (let view of subViews) {
-      if (view.rootElement === el) {
-        return true;
-      }
-    }
-
-    return false;
   }
 }
 
