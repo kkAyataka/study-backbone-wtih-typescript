@@ -1,0 +1,10 @@
+<h2>Hello</h2>
+<div>
+  <label>
+    Text Inout:
+    <input id="text-input" type="text" value="<%- text %>">
+  </label>
+</div>
+<div>
+  <button id="btn" type="button">ボタン</button>
+</div>

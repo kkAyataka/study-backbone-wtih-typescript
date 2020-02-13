@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Composition</title>
+    <script src="scripts/libs/require.js"></script>
+    <script>
+      requirejs(['scripts/app/main/requirejs-config'], () => {
+        requirejs(['app/composition/view/main-view']);
+      });
+    </script>
+  </head>
+  <body>
+    <div id="content"></div>
+  </body>
+</html>
