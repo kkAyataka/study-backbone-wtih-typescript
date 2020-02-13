@@ -5,31 +5,18 @@ import BBVModel from './bbvmodel';
 import DOMSyncer from '../../util/dom-syncer';
 
 /**
- * Abstruct base view.
+ * Base view interface
  * Usually you do not use this class.
  *
  * This class does not depend to a view model type.
  * This class used for building abstract view structure.
  */
-export abstract class BBBaseView extends Backbone.View {
-  /**
-   * @param opts
-   * @param opts.el Selector string to the rendering target element
-   * @param opts.valueName Referenced value name in the parent view model
-   */
-  constructor(opts: {el: string, valueName?: string}) {
-    super(opts);
-
-    this.valueName = opts.valueName || '';
-  }
-
+export interface BBBaseView {
   /** Render */
-  abstract render(value?: object): BBBaseView;
+  render(value?: object): BBBaseView;
 
   /** Rendered root element */
-  get rootElement(): Element | null {
-    return (this.$el && this.$el.length > 0) ? this.$el[0] : null;
-  }
+  readonly rootElement: Element | null;
 
   /**
    * Reference value name in the parent view model.
@@ -40,13 +27,13 @@ export abstract class BBBaseView extends Backbone.View {
    * This referenced value is merged with view model
    * before rendering.
    */
-  readonly valueName: string = '';
+  readonly valueName: string;
 }
 
 /**
  * Base View class binded a view model class
  */
-export class BBView<T extends object> extends BBBaseView {
+export class BBView<T extends object> extends Backbone.View implements BBBaseView  {
   /**
    * @param opts
    * @param opts.el Selector string to the rendering target element
@@ -64,6 +51,7 @@ export class BBView<T extends object> extends BBBaseView {
     super(opts);
 
     this.el_ = opts.el;
+    this.valueName = opts.valueName ?? '';
     this.template_ = _.template(DOMSyncer.embedRID(opts.templateText));
     this.vmodel = opts.vmodel;
 
@@ -97,7 +85,7 @@ export class BBView<T extends object> extends BBBaseView {
    * This process is not efficient.
    * But dom object keeping is very useful.
    */
-  render(value?: object): this {
+  render(value?: object): BBBaseView {
     this.ensureElement_();
 
     this.vmodel.value(value, {silent: true});
@@ -150,6 +138,14 @@ export class BBView<T extends object> extends BBBaseView {
 
     return els;
   }
+
+  /** implements BBBaseView */
+  get rootElement(): Element | null {
+    return (this.$el && this.$el.length > 0) ? this.$el[0] : null;
+  }
+
+  /** implements BBBaseView */
+  valueName: string;
 
   /** Element selector */
   private readonly el_: string;
