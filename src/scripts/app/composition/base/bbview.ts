@@ -29,7 +29,7 @@ export class BBView<T extends object> implements BBBaseView {
     this.vmodel.sayTo(this.raw_, 'change', () => this.render());
   }
 
-  createProxyEvents_() {
+  private createProxyEvents_() {
     const proxy: {[k: string]: Function} = {};
     const events = this.events();
     for (let e in events) {
@@ -40,6 +40,24 @@ export class BBView<T extends object> implements BBBaseView {
     }
 
     return proxy;
+  }
+
+  addView<T extends BBBaseView>(view: T): T {
+    if (!this.views_.includes(view)) {
+      this.views_.push(view);
+    }
+
+    return view;
+  }
+
+  removeView<T extends BBBaseView>(view: T): T | null {
+    const index = this.views_.indexOf(view);
+    if (!this.views_.includes(view)) {
+      this.views_.splice(index, 1);
+      return view;
+    } else {
+      return null;
+    }
   }
 
   render(value?: object): this {
@@ -57,7 +75,17 @@ export class BBView<T extends object> implements BBBaseView {
       DOMSyncer.sync($nowEl[0], this.getSubViewElements_(), newEl);
     }
 
+    for (let view of this.views_) {
+      this.vmodel.changed.ZZZ
+      const v = (view.valueName) ? this.vmodel.changed[view.valueName] : null;
+      view.render(v);
+    }
+
     return this;
+  }
+
+  protected triggerChangeValue(value: any): void {
+    this.raw_.$el.trigger('change:value', value);
   }
 
   private ensureElement_(): void {
@@ -92,3 +120,5 @@ export class BBView<T extends object> implements BBBaseView {
   private readonly template_: Function;
   private readonly views_: BBBaseView[];
 }
+
+export default BBView;

@@ -8,3 +8,4 @@
 <div>
   <button id="btn" type="button">ボタン</button>
 </div>
+<div id="sub-view"></div>

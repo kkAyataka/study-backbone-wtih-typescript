@@ -1,0 +1,4 @@
+<input id="num-input" type="number" value="<%- value.value %>">
+<button id="sub-input-btn" type="button"
+  <%- isEnabled ? '' : 'disabled' %>>
+  Input</button>

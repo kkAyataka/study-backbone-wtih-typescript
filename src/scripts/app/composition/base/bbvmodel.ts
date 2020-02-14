@@ -17,5 +17,11 @@ export class BBVModel <T extends object> {
     return this.raw_.attributes;
   }
 
+  get changed(): {[k: string]: any} {
+    return this.raw_.changed;
+  }
+
   private readonly raw_: Backbone.Model<T>;
 }
+
+export default BBVModel;

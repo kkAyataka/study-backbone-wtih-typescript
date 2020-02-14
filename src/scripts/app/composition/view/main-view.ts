@@ -1,6 +1,8 @@
 import {BBVModel} from '../base/bbvmodel';
 import {BBView} from '../base/bbview';
 import templateText from 'text!./main-view.template';
+import * as SubView from './sub-view';
+import cl from '../../util/console-logger';
 
 class VModel {
   text: string = 'text';
@@ -9,6 +11,8 @@ class VModel {
 new (class MainView extends BBView<VModel> {
   constructor(el: string) {
     super({el, templateText, vmodel: new BBVModel(new VModel())});
+
+    this.addView(new SubView.View({el: '#sub-view'}));
   }
 
   events(): {[k: string]: Function | string} {
@@ -18,7 +22,11 @@ new (class MainView extends BBView<VModel> {
       },
 
       'click #btn': (eve: object) => {
-        console.log(eve);
+        cl.trace();
+      },
+
+      'change:value #sub-view': (eve: object, value: SubView.Value) => {
+        cl.trace();
       },
     }
   }

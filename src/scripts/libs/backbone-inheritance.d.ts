@@ -20,7 +20,7 @@ declare module "backbone-inheritance" {
     protected set(attrs: Partial<T>, opts?: {silent: boolean}): void;
     protected get(attr: string): any;
     protected readonly attributes: T;
-    readonly changed: {[k: string]: object};
+    readonly changed: {[k: string]: any};
   }
 
   /**
