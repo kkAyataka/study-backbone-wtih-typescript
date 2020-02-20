@@ -20,7 +20,7 @@ export namespace DOMSyncer {
    * @param templateText
    */
   export function embedRID(templateText: string): string {
-    return templateText.replace(/<([^/%]("(.|\s)*?"|'(.|\s)*?'|<%(.|\s)*?%>|[^"'])*?)>/g,
+    return templateText.replace(/<([^/%]("(.|\s)*?"|'(.|\s)*?'|<%(.|\s)*?%>|[^"'<])*?)(?<!%)>/g,
       (m, p1) => `<${p1} ${ATTR_NAME_RID}="${g_rid++}">`);
   }
 
