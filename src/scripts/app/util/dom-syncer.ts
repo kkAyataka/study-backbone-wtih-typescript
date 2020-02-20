@@ -1,19 +1,22 @@
 /**
  * Attribute name of the rid
- * @private
+ * @ignore
  */
 const ATTR_NAME_RID = 'data-domsyncerid';
 
 /**
  * Managed embedded rid
- * @private
+ * @ignore
  */
 let g_rid: number = 0;
 
 export namespace DOMSyncer {
   /**
    * Embed rendering id (rid) to the HTML elements.
-   * e.g. <div></div> -> <div data-domsyncerid="0">
+   *
+   * ```html
+   * <div></div> -> <div data-domsyncerid="0">
+   * ```
    * @param templateText
    */
   export function embedRID(templateText: string): string {

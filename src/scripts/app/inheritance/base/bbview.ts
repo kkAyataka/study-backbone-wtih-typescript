@@ -40,7 +40,7 @@ export class BBView<T extends object> extends Backbone.View implements BBBaseVie
    * @param opts.valueName Referenced value name in the parent view model
    *   This value is used in BBBaseView. Refer to BBBaseView reference for details.
    * @param opts.templateText HTML template text. Underscore.js is used.
-   * @param opes.vmodel View model
+   * @param opts.vmodel View model
    */
   constructor(opts: {
     el: string,
