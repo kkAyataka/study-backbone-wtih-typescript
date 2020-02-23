@@ -7,7 +7,7 @@
 <div class="frame">
   <p>Sub View</p>
   <div>
-    <input type="number" id="sub-value" value="<%- value %>">
+    <input type="number" id="sub-value" value="<%- value.value %>">
   </div>
   <div>
     <button type="button" id="sub-button">Set</button>
