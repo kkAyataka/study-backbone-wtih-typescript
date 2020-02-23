@@ -8,6 +8,9 @@
     <li>1</li>
     <% } %>
     <li>2</li>
+    <% for (let i = 0; i < 3; ++i) { %>
+    <li><%- 3 + i %></li>
+    <% } %>
   </ul>
 </div>
 <div id="sub-view" class='sub-view'></div>

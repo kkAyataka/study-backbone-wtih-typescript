@@ -1,6 +1,15 @@
 /** Backvbone.js */
 declare module "backbone-inheritance" {
   /**
+   * Backbone.Events
+   */
+  export class Events {
+    on(event: string, callback: Function, context?: object): void;
+    off(event: string, callback: Function, context?: object): void;
+    listenTo(other: object, event: string, callback: Function): void;
+  }
+
+  /**
    * Backbone.View
    */
   export class View extends Events {
@@ -18,17 +27,8 @@ declare module "backbone-inheritance" {
   export class Model<T extends object> extends Events {
     constructor(attrs: T);
     protected set(attrs: Partial<T>, opts?: {silent: boolean}): void;
-    protected get(attr: string): any;
+    protected get(attr: string): void;
     protected readonly attributes: T;
     readonly changed: {[k: string]: any};
-  }
-
-  /**
-   * Backbone.Events
-   */
-  export class Events {
-    on(event: string, callback: Function, context?: Object): void;
-    off(event: string, callback: Function, context?: Object): void;
-    listenTo(other: object, event: string, callback: Function): void;
   }
 }

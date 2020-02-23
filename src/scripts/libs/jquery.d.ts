@@ -1,5 +1,10 @@
 declare module "jquery" {
-  const content: any;
+  const content: Function | object;
   export default content;
-  function prop(): any;
+  function prop(): string | boolean;
+
+  export interface Event<T extends HTMLElement>{
+    target: T;
+    currentTarget: T;
+  }
 }

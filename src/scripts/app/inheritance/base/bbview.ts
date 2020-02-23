@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import * as _ from 'underscore';
 import * as Backbone from 'backbone-inheritance';
 import BBVModel from './bbvmodel';
@@ -43,10 +42,10 @@ export class BBView<T extends object> extends Backbone.View implements BBBaseVie
    * @param opts.vmodel View model
    */
   constructor(opts: {
-    el: string,
-    valueName?: string,
-    templateText: string,
-    vmodel: BBVModel<T>,
+    el: string;
+    valueName?: string;
+    templateText: string;
+    vmodel: BBVModel<T>;
   }) {
     super(opts);
 
@@ -100,7 +99,7 @@ export class BBView<T extends object> extends Backbone.View implements BBBaseVie
       DOMSyncer.sync($nowEl[0], this.getSubViewElements_(), newEl);
     }
 
-    for (let view of this.views_) {
+    for (const view of this.views_) {
       view.render(this.vmodel.changed[view.valueName]);
     }
 
@@ -130,7 +129,7 @@ export class BBView<T extends object> extends Backbone.View implements BBBaseVie
    */
   private getSubViewElements_(): Element[] {
     const els: Element[] = [];
-    for (let view of this.views_) {
+    for (const view of this.views_) {
       if (view.rootElement) {
         els.push(view.rootElement);
       }
