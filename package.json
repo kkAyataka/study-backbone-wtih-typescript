@@ -1,0 +1,26 @@
+{
+  "name": "study-backbone-wtih-typescript",
+  "version": "1.0.0",
+  "description": "Study Backbone.js with TypeScript",
+  "directories": {
+    "doc": "doc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kkAyataka/study-backbone-wtih-typescript.git"
+  },
+  "author": "kkAyataka",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/kkAyataka/study-backbone-wtih-typescript/issues"
+  },
+  "homepage": "https://github.com/kkAyataka/study-backbone-wtih-typescript#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.20.0",
+    "@typescript-eslint/parser": "^2.20.0",
+    "eslint": "^6.8.0",
+    "gulp": "^4.0.2",
+    "gulp-shell": "^0.8.0",
+    "typescript": "^3.8.2"
+  }
+}
