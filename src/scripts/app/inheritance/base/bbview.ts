@@ -1,7 +1,7 @@
 import * as _ from 'underscore';
 import * as Backbone from 'backbone-inheritance';
-import BBVModel from './bbvmodel';
-import DOMSyncer from '../../util/dom-syncer';
+import {BBVModel} from './bbvmodel';
+import * as DOMSyncer from '../../util/dom-syncer';
 
 /**
  * Base view interface
@@ -106,13 +106,6 @@ export class BBView<T extends object> extends Backbone.View implements BBBaseVie
     return this;
   }
 
-  /** Triggers change:value event with the VModel value */
-  protected triggerChange(): void {
-    if (Object.keys(this.vmodel.changed).length > 0) {
-      this.$el.trigger('change:value', this.vmodel.value());
-    }
-  }
-
   /**
    * Ensures element.
    *
@@ -143,7 +136,7 @@ export class BBView<T extends object> extends Backbone.View implements BBBaseVie
     return (this.$el && this.$el.length > 0) ? this.$el[0] : null;
   }
 
-  /** implements BBBaseView */
+  /** Implements BBBaseView */
   valueName: string;
 
   /** Element selector */
@@ -154,4 +147,51 @@ export class BBView<T extends object> extends Backbone.View implements BBBaseVie
   protected readonly vmodel: BBVModel<T>;
   /** Sub views */
   private readonly views_: BBBaseView[] = [];
+}
+
+/**
+ * Base View class for sub view component
+ */
+export abstract class BBViewComponent<VModelValue extends object, Value extends object> extends BBView<VModelValue> {
+  constructor(
+    params: {
+      el: string;
+      valueName?: string;
+      templateText: string;
+      vmodel: BBVModel<VModelValue>;
+    }
+  ) {
+    super({
+      el: params.el,
+      valueName: params.valueName,
+      templateText: params.templateText,
+      vmodel: params.vmodel,
+    });
+  }
+
+  /** Set value and Get value */
+  value(newValue?: Value, opts?: {silent: false}): Value {
+    if (newValue !== undefined) {
+      this.vmodel.value(this.valueToVModel(newValue), opts);
+    }
+
+    return this.vmodelToValue(this.vmodel.value());
+  }
+
+  /** Triggers change:value event with current value. */
+  protected triggerChangeValue(value?: Value): void {
+    this.$el.trigger('change:value', value ?? this.value());
+  }
+
+  /**
+   * This function call from value method for setting new value to vmodel.
+   * @param value
+   */
+  protected abstract valueToVModel(value: Value): Partial<VModelValue>;
+
+  /**
+   * This function call from value method for getting return value from vmodel.
+   * @param vmodel
+   */
+  protected abstract vmodelToValue(vmodel: VModelValue): Value;
 }

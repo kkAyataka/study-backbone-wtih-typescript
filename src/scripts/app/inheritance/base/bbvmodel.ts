@@ -3,7 +3,7 @@ import * as Backbone from 'backbone-inheritance';
 /**
  * Backbone Base View Model
  */
-export = class BBVModel<T extends object> extends Backbone.Model<T> {
+export class BBVModel<T extends object> extends Backbone.Model<T> {
   /**
    * @param attrs Initial attributes
    */

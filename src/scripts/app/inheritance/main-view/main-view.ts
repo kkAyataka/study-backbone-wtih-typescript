@@ -1,9 +1,9 @@
 import * as $ from 'jquery';
 import {BBView} from '../base/bbview';
-import BBVModel from '../base/bbvmodel';
+import {BBVModel} from '../base/bbvmodel';
 import {SubView, SubViewValue} from './sub-view';
-import templateText from 'text!app/inheritance/main-view/main-view.template'
-import Util from '../../util/util';
+import templateText from 'text!app/inheritance/main-view/main-view.template';
+import * as Util from '../../util/util';
 
 class VModel {
   text = '';
@@ -63,4 +63,4 @@ export class MainView extends BBView<VModel> {
   }
 }
 
-new MainView('#content').start()
+new MainView('#content').start();

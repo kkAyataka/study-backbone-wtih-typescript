@@ -2,7 +2,7 @@
 <button id="button" <%- enable ? '' : 'disabled' %>>ボタン</button>
 <input type="text" id="text" value="<%- text %>">
 <div>
-  <ul>
+  <ul data-domsyncer-no>
     <%const v=0;%>
     <% if (enable) { %>
     <li>1</li>
