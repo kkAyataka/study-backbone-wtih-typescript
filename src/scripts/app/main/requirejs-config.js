@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 requirejs.config({
   baseUrl: 'scripts/libs',
@@ -10,3 +10,9 @@ requirejs.config({
       'backbone-bridge': 'backbone',
   },
 });
+
+window.onerror = function(msg, src, lineno, colno, err) {
+  requirejs(['app/util/console-logger'], (cl) => {
+    cl.fatal(msg, err);
+  });
+};

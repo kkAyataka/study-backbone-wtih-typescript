@@ -2,6 +2,7 @@ import * as $ from 'jquery';
 import {BBViewComponent} from '../base/bbview';
 import {BBVModel} from '../base/bbvmodel';
 import templateText from 'text!app/inheritance/main-view/sub-view.template';
+import * as cl from '../../util/console-logger';
 
 /** */
 export interface SubViewValue {
@@ -38,6 +39,16 @@ export class SubView extends BBViewComponent<VModel, SubViewValue> {
 
         this.triggerChangeValue();
       },
+
+      'click #trace-btn': (): void => {
+        cl.infoTrace();
+      },
+
+      'click #fatal-btn': (): void => {
+        cl.fatal('Fatal no err');
+        //a.b.c = 0;
+      },
     };
   }
 }
+

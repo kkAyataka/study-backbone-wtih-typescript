@@ -12,4 +12,10 @@
   <div>
     <button type="button" id="sub-button">Set</button>
   </div>
+  <div>
+    <button type="button" id="trace-btn">Trace</button>
+  </div>
+  <div>
+    <button type="button" id="fatal-btn">Fatal</button>
+  </div>
 </div>
