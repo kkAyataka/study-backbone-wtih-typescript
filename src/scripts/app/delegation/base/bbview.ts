@@ -1,5 +1,5 @@
 import * as _ from 'underscore';
-import * as Backbone from 'backbone-composition';
+import * as Backbone from 'backbone-delegation';
 import {BBVModel} from './bbvmodel';
 import * as DOMSyncer from '../../util/dom-syncer';
 

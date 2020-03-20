@@ -1,14 +1,22 @@
 /** Backvbone.js */
-declare module "backbone-composition" {
+declare module 'backbone-delegation' {
+  /**
+   * Backbone.Events
+   */
+  export class Events {
+    on(event: string, callback: Function, context?: object): void;
+    off(event: string, callback: Function, context?: object): void;
+    listenTo(other: object, event: string, callback: Function): void;
+  }
+
   /**
    * Backbone.View
    */
   export class View extends Events {
     constructor(
       opts: {
-        el: string,
-        events: Function | {[k: string]: Function | string,
-        },
+        el: string;
+        events: Function | {[k: string]: Function | string};
       });
     // 'model', 'collection', 'el', 'id', 'attributes', 'className', 'tagName', 'events'
     public initialize(): void;
@@ -27,14 +35,5 @@ declare module "backbone-composition" {
     get(attr: string): any;
     readonly attributes: T;
     readonly changed: {[k: string]: object};
-  }
-
-  /**
-   * Backbone.Events
-   */
-  export class Events {
-    on(event: string, callback: Function, context?: Object): void;
-    off(event: string, callback: Function, context?: Object): void;
-    listenTo(other: object, event: string, callback: Function): void;
   }
 }

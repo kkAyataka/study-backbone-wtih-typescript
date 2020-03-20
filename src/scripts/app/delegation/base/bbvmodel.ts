@@ -1,4 +1,4 @@
-import * as Backbone from 'backbone-composition'
+import * as Backbone from 'backbone-delegation'
 
 export class BBVModel <T extends object> {
   constructor(attrs: T) {

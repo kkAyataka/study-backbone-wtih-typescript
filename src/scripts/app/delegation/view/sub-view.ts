@@ -7,14 +7,14 @@ export interface Value {
 }
 
 class VModel {
-  isEnabled: boolean = false;
+  isEnabled = false;
   value: Partial<Value> = {
     value: 11,
   };
 }
 
 export class View extends BBView<VModel> {
-  constructor(opts: {el: string, valueName?: string}) {
+  constructor(opts: {el: string; valueName?: string}) {
     super({
       el: opts.el,
       valueName:  opts.valueName,
