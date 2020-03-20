@@ -13,6 +13,10 @@ module.exports = {
     "semi": "off",
     "@typescript-eslint/semi": ["error"],
     "quotes": "off",
-    "@typescript-eslint/quotes": ["error", "single"]
+    "@typescript-eslint/quotes": ["error", "single"],
+  },
+  globals: {
+    "window": true,
+    "requirejs": true,
   }
 };
