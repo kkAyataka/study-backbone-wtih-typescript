@@ -1,7 +1,7 @@
 import * as _ from 'underscore';
 import * as Backbone from 'backbone-composition';
 import {BBVModel} from './bbvmodel';
-import DOMSyncer from '../../util/dom-syncer';
+import * as DOMSyncer from '../../util/dom-syncer';
 
 interface BBBaseView {
   render(value?: object): this;

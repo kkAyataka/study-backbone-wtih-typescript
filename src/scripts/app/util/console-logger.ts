@@ -1,5 +1,30 @@
-namespace ConsoleLogger {
-  function getStackTrace_() : string[] {
+/**
+ * Utility class for console logging.
+ */
+class ConsoleLogger {
+  static trace(): void {
+    const stack = ConsoleLogger.getStackTrace_();
+    if (stack.length > 1) {
+      console.log(stack[1]);
+    }
+  }
+
+  static info(msg: string | object): void {
+    console.log(ConsoleLogger.getMsg_(msg));
+  }
+
+  static error(msg?: string | object): void {
+    const stack = ConsoleLogger.getStackTrace_();
+    for (let i = stack.length - 1; i > 0; --i) {
+      console.error(stack[i]);
+    }
+
+    if (msg) {
+      console.error(ConsoleLogger.getMsg_(msg));
+    }
+  }
+
+  private static getStackTrace_(): string[] {
     const stack = Error().stack?.match(/.*at(.*)/g);
     if (stack) {
       const res = [];
@@ -12,33 +37,11 @@ namespace ConsoleLogger {
     }
   }
 
-  function getMsg_(msg: string | object): string {
+  private static getMsg_(msg: string | object): string {
     if (typeof msg === 'string') {
       return msg;
     } else {
       return JSON.stringify(msg);
-    }
-  }
-
-  export function trace(): void {
-    const stack = getStackTrace_();
-    if (stack.length > 1) {
-      console.log(stack[1]);
-    }
-  }
-
-  export function info(msg: string | object): void {
-    console.log(getMsg_(msg));
-  }
-
-  export function error(msg?: string | object): void {
-    const stack = getStackTrace_();
-    for (let i = stack.length - 1; i > 0; --i) {
-      console.error(stack[i]);
-    }
-
-    if (msg) {
-      console.error(getMsg_(msg));
     }
   }
 }
