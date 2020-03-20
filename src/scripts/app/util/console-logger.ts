@@ -1,49 +1,70 @@
 /**
- * Utility class for console logging.
+ * Gets formatted stack trace string array.
+ * @param err
  */
-class ConsoleLogger {
-  static trace(): void {
-    const stack = ConsoleLogger.getStackTrace_();
-    if (stack.length > 1) {
-      console.log(stack[1]);
-    }
-  }
-
-  static info(msg: string | object): void {
-    console.log(ConsoleLogger.getMsg_(msg));
-  }
-
-  static error(msg?: string | object): void {
-    const stack = ConsoleLogger.getStackTrace_();
-    for (let i = stack.length - 1; i > 0; --i) {
-      console.error(stack[i]);
-    }
-
-    if (msg) {
-      console.error(ConsoleLogger.getMsg_(msg));
-    }
-  }
-
-  private static getStackTrace_(): string[] {
-    const stack = Error().stack?.match(/.*at(.*)/g);
-    if (stack) {
-      const res = [];
-      for (let i = 1; i < stack.length; ++i) {
-        res.push(stack[i].substring(7));  // remove "    at " at start
+function getStackTrace(err: Error): string[] {
+  const stack = err.stack ?? '';
+  if (stack) {
+    const regex = new RegExp(`  (.*at.*)\\(${location.origin}/(.*):(.*):(.*)\\)`, 'g');
+    const res = [];
+    let i;
+    while ((i = regex.exec(stack)) !== null) {
+      if (i.length >= 5) {
+        res.push(`msg:${i[1]}\tsrc:${i[2]}\tr:${i[3]}\tc:${i[4]}`);
       }
-      return res;
-    } else {
-      return [];
     }
-  }
 
-  private static getMsg_(msg: string | object): string {
-    if (typeof msg === 'string') {
-      return msg;
-    } else {
-      return JSON.stringify(msg);
-    }
+    return res;
+  } else {
+    return [];
   }
 }
 
-export default ConsoleLogger;
+/**
+ * Gets message string.
+ * If the parameter is object, this function return JSON.stringify result.
+ * @param msg
+ */
+function getMsg(msg: string | object): string {
+  if (typeof msg === 'string') {
+    return msg;
+  } else {
+    return JSON.stringify(msg);
+  }
+}
+
+/**
+ * Outputs automatic generating message by stack trace.
+ * This message can be used for function call tracing.
+ *
+ * ```
+ * 'click #trace-btn': (): void => {
+ *   cl.infoTrace(); // msg:  at SubView.click #trace-btn 	src:scripts/app/inheritance/main-view/sub-view.js	r:44	c:24
+ * },
+ * ```
+ */
+export function infoTrace(): void {
+  const stack = getStackTrace(Error());
+  if (stack.length > 1) {
+    console.log(stack[1]);
+  }
+}
+
+/**
+ * Show stack trace and error message
+ * @param msg
+ * @param err Error object
+ *   If this parameter is specified, get stack trace from this object,
+ *   If this parameter is not specified, get stak trace from new Error object.
+ */
+export function fatal(msg?: string | object, err?: Error): void {
+  const endIndex = (err) ? 0 : 1;
+  const stack = getStackTrace(err ?? Error());
+  for (let i = stack.length - 1; i >= endIndex; --i) {
+    console.error(stack[i]);
+  }
+
+  if (msg) {
+    console.error(getMsg(msg));
+  }
+}
