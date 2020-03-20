@@ -19,7 +19,7 @@
     {
       "label": "live-server",
       "type": "shell",
-      "command": "live-server out",
+      "command": "live-server out --no-browser",
     }
   ]
 }
